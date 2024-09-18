@@ -9,7 +9,7 @@ import (
 
 var (
 	errWrongNumArgs   = errors.New("wrong number of arguments")
-	errUnknownCommand = errors.New("unkown command")
+	errUnknownCommand = errors.New("unknown command")
 	errInvalidQuery   = errors.New("invalid query")
 )
 

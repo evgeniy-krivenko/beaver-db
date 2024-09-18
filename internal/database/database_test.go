@@ -7,10 +7,11 @@ import (
 	"log/slog"
 	"testing"
 
-	"beaver/internal/database"
-	"beaver/internal/database/compute"
 	"github.com/stretchr/testify/suite"
 	gomock "go.uber.org/mock/gomock"
+
+	"beaver/internal/database"
+	"beaver/internal/database/compute"
 )
 
 //go:generate mockgen -source=database.go -destination=database_mock_test.go -package=database_test

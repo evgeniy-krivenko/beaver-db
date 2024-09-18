@@ -8,10 +8,11 @@ import (
 	"log/slog"
 	"testing"
 
-	"beaver/internal/database/storage"
-	"beaver/internal/database/storage/engine"
 	"github.com/stretchr/testify/suite"
 	gomock "go.uber.org/mock/gomock"
+
+	"beaver/internal/database/storage"
+	"beaver/internal/database/storage/engine"
 )
 
 //go:generate mockgen -source=storage.go -destination=storage_mock_test.go -package=storage_test

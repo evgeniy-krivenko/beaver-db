@@ -1,6 +1,6 @@
 package compute
 
-// avaliable in _test.go files
+// available in _test.go files.
 var (
 	ErrWrongNumArgs   = errWrongNumArgs
 	ErrUnknownCommand = errUnknownCommand

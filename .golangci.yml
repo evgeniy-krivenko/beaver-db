@@ -1,0 +1,85 @@
+run:
+  tests: true
+
+issues:
+  max-same-issues: 0
+
+linters-settings:
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(beaver)
+    custom-order: true
+
+  godox:
+    keywords:
+      - FIXME
+      - TODO
+
+  lll:
+    line-length: 130
+
+  tagliatelle:
+    case:
+      rules:
+        # Any struct tag type can be used.
+        # Support string case: `camel`, `pascal`, `kebab`, `snake`, `goCamel`, `goPascal`, `goKebab`, `goSnake`, `upper`, `lower`, `header`
+        json: camel
+        toml: snake
+
+linters:
+  disable-all: true
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - execinquery
+    - exportloopref
+    - gci
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - godox
+    - gofmt
+    - goheader
+    - goimports
+    - gomoddirectives
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - importas
+    - ineffassign
+    - lll
+    - makezero
+    - misspell
+    - musttag
+    - nakedret
+    - nestif
+    - nilnil
+    - nolintlint
+    - nosprintfhostport
+    - prealloc
+    - predeclared
+    - promlinter
+    - reassign
+    - revive
+    - staticcheck
+    - stylecheck
+    - tagliatelle
+    - tenv
+    - testableexamples
+    - thelper
+    - typecheck
+    - unconvert
+    - unused
+    - usestdlibvars
+    - whitespace
+

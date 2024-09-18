@@ -5,16 +5,17 @@ import (
 	"log/slog"
 	"testing"
 
-	"beaver/internal/database/compute"
 	"github.com/stretchr/testify/require"
+
+	"beaver/internal/database/compute"
 )
 
 func Test_Query(t *testing.T) {
 	dummyLogger := slog.New(slog.NewTextHandler(io.Discard, nil))
 
 	type err struct {
-		occured bool
-		err     error
+		occurred bool
+		err      error
 	}
 
 	comp := compute.New(dummyLogger)
@@ -28,40 +29,40 @@ func Test_Query(t *testing.T) {
 			name: "invalid query when empty tokens",
 			q:    "",
 			err: err{
-				occured: true,
-				err:     compute.ErrInvalidQuery,
+				occurred: true,
+				err:      compute.ErrInvalidQuery,
 			},
 		},
 		{
 			name: "unknown command err",
 			q:    "METHOD",
 			err: err{
-				occured: true,
-				err:     compute.ErrUnknownCommand,
+				occurred: true,
+				err:      compute.ErrUnknownCommand,
 			},
 		},
 		{
 			name: "wrong number of arguments for get cmd",
 			q:    "GET key value",
 			err: err{
-				occured: true,
-				err:     compute.ErrWrongNumArgs,
+				occurred: true,
+				err:      compute.ErrWrongNumArgs,
 			},
 		},
 		{
 			name: "wrong number of arguments for set cmd",
 			q:    "SET key",
 			err: err{
-				occured: true,
-				err:     compute.ErrWrongNumArgs,
+				occurred: true,
+				err:      compute.ErrWrongNumArgs,
 			},
 		},
 		{
 			name: "wrong number of arguments for del cmd",
 			q:    "DEL key value",
 			err: err{
-				occured: true,
-				err:     compute.ErrWrongNumArgs,
+				occurred: true,
+				err:      compute.ErrWrongNumArgs,
 			},
 		},
 		{
@@ -84,7 +85,7 @@ func Test_Query(t *testing.T) {
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
 			query, err := comp.Parse(c.q)
-			if c.err.occured {
+			if c.err.occurred {
 				require.Error(t, err)
 				require.Empty(t, query)
 			} else {
