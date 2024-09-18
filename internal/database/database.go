@@ -8,6 +8,13 @@ import (
 	"beaver/internal/database/compute"
 )
 
+const (
+	errPrefix       = "ERR"
+	internalErrText = "internal error"
+
+	successMsg = "OK"
+)
+
 type computeParser interface {
 	Parse(string) (compute.Query, error)
 }
@@ -37,7 +44,7 @@ func (d *Database) ParseQuery(ctx context.Context, query string) string {
 	d.logger.Debug("handling query", slog.String("query", query))
 	q, err := d.parser.Parse(query)
 	if err != nil {
-		return fmt.Sprintf("ERR: %s", err.Error())
+		return fmt.Sprintf("%s: %s", errPrefix, err.Error())
 	}
 
 	switch q.CommandID() {
@@ -54,14 +61,14 @@ func (d *Database) ParseQuery(ctx context.Context, query string) string {
 		slog.Int("command_id", int(q.CommandID())),
 	)
 
-	return "ERR: internal error"
+	return fmt.Sprintf("%s: %s", errPrefix, internalErrText)
 }
 
 func (d *Database) handleGetCommand(ctx context.Context, args []string) string {
 	key := args[0]
 	res, err := d.storage.Get(ctx, key)
 	if err != nil {
-		return fmt.Sprintf("ERR: %v", err)
+		return fmt.Sprintf("%s: %v", errPrefix, err)
 	}
 	return res
 }
@@ -71,16 +78,16 @@ func (d *Database) handleSetCommand(ctx context.Context, args []string) string {
 
 	err := d.storage.Set(ctx, key, value)
 	if err != nil {
-		return fmt.Sprintf("ERR: %v", err)
+		return fmt.Sprintf("%s: %v", errPrefix, err)
 	}
-	return "OK"
+	return successMsg
 }
 
 func (d *Database) handleDelCommand(ctx context.Context, args []string) string {
 	key := args[0]
 	err := d.storage.Del(ctx, key)
 	if err != nil {
-		return fmt.Sprintf("ERR: %v", err)
+		return fmt.Sprintf("%s: %v", errPrefix, err)
 	}
-	return "OK"
+	return successMsg
 }
