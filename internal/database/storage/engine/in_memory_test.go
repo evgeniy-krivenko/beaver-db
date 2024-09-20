@@ -2,7 +2,6 @@ package engine
 
 import (
 	"context"
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,9 +9,8 @@ import (
 )
 
 func TestInMemory_Get(t *testing.T) {
-	t.Parallel()
-
 	t.Run("success get", func(t *testing.T) {
+		t.Parallel()
 		const (
 			key   = "test_key"
 			value = "value"
@@ -27,13 +25,13 @@ func TestInMemory_Get(t *testing.T) {
 	})
 
 	t.Run("key not found", func(t *testing.T) {
+		t.Parallel()
 		db := NewInMemory()
 
 		res, err := db.Get(context.Background(), "random-key")
 
 		require.ErrorIs(t, err, ErrNotKeyFound)
 		assert.Empty(t, res)
-		assert.True(t, IsKeyNotFountError(fmt.Errorf("wrapped err: %w", err)))
 	})
 }
 

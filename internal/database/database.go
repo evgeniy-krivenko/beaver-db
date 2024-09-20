@@ -9,10 +9,9 @@ import (
 )
 
 const (
+	successMsg      = "OK"
 	errPrefix       = "ERR"
-	internalErrText = "internal error"
-
-	successMsg = "OK"
+	internalErrText = "INTERNAL ERROR"
 )
 
 type computeParser interface {

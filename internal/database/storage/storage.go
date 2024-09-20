@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"errors"
 	"log/slog"
 
 	"beaver/internal/database/storage/engine"
@@ -40,5 +41,5 @@ func (s *Storage) Del(ctx context.Context, key string) error {
 }
 
 func IsKeyNotFountError(err error) bool {
-	return engine.IsKeyNotFountError(err)
+	return errors.Is(err, engine.ErrNotKeyFound)
 }

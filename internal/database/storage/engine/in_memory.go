@@ -34,7 +34,3 @@ func (e *InMemory) Del(_ context.Context, key string) error {
 	delete(e.s, key)
 	return nil
 }
-
-func IsKeyNotFountError(err error) bool {
-	return errors.Is(err, ErrNotKeyFound)
-}
